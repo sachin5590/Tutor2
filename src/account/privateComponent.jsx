@@ -1,9 +1,19 @@
 import React from 'react'
 import { Outlet,Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Navbar from '../component/Navbar';
 
 export const PrivateComponent = () => {
+  const isLoggedIn = useSelector((state) => state.account?.isLoggedIn);
 
-    const isLoggedin = useSelector((state)=>state.changeLoginData)
-  return isLoggedin? <Outlet/> : <Navigate to="/"/>
+  if (!isLoggedIn) {
+    return <Navigate to = "/"/>;
+  }
+
+  return (
+    <>
+      <Navbar/>
+      <Outlet/>
+    </>
+  );
 }

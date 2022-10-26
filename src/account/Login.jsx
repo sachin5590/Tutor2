@@ -5,16 +5,14 @@ import { loginData } from "../action/Action";
 
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const account = useSelector((state) => state.account);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
-  const detectSignup = useSelector((state) => state.changeSignupData.account);
-  let navigat = useNavigate();
-
- // console.log("data coming from signup", detectSignup.payload.email);
- // console.log("compare data",(detectSignup));
-  const validatedata = () => {
+  const validateData = () => {
     if (email == "") {
       alert("please enter valid email");
       return false;
@@ -22,32 +20,32 @@ const Login = () => {
     if (password == "") {
       alert("please enter valid password");
       return false;
-    } else if (password.length < 6) {
-      alert("please enter minimum 6 digit");
     }
-
+    if (password.length < 6) {
+      alert("please enter minimum 6 digit");
+      return false;
+    }
     
-    if (email === detectSignup.payload.email && password === detectSignup.payload.password) {
-     
-       alert("Login Succecfully");
-       navigat("/home")
+    if (email === account.email && password === account.password) {
+      alert("Login Succecfully");
       return true;
     } else {
-      alert("wrong crendential")
+      alert("Wrong credential")
       return false;
     }
   };
+
   function submitForm(e) {
     e.preventDefault();
 
-    if (validatedata()) {
+    if (validateData()) {
       dispatch(
         loginData({
-          email:email,
-          password:password
+          email,
+          password
         }) 
       );
-     
+      navigate("/home");
     }
   }
 

@@ -1,63 +1,44 @@
 import React, { useState } from "react";
  import { useNavigate } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signUpData } from "../action/Action";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch()
-   const detectSign = useSelector((state)=>state.changeSignupData)
-  
-   console.log("Signup" ,detectSign.account)
-  
-  
-
-  let navigat = useNavigate();
-  
-  const validatedata =()=>{
-    if (name == "") {
+  const validateData =()=>{
+    if (!name) {
       alert("please enter valid name");
-      return false
+      return false;
     }
-    if (email == "") {
+    if (!email) {
       alert("please enter valid email");
       return false;
     }
-    if (password == "") {
+    if (!password) {
       alert("please enter valid password");
       return false;
     }
-    if (name && email && password ) {
-      alert("Signup succesfully && please login")
-      return true;
-    } else {
-      return false;
-    }
 
-  }
+    return true;
+  };
 
-  function submitForm(e) {
+  const submitForm = (e) => {
     e.preventDefault()
-  
-   
-    if (validatedata()){
-      dispatch(
-        signUpData({
-          name:name,
-          email:email,
-          password:password
-        })
-      )
-       navigat("/login")
-    }
-  }
 
-  
- 
+    if (validateData()){
+      dispatch(
+        signUpData({ name, email, password })
+      );
+      navigate("/login");
+    }
+  };
+
   return (
     <form action="" onSubmit={submitForm}>
      <section>
@@ -80,5 +61,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-// onClick={()=>{dispatch(employessData({name:name,email:email,password:password}))}}

@@ -9,29 +9,24 @@ export const formData = (data)=>{
     }
 }
 
-export const signUpData = (data)=>{
-    console.log(data)
+export const signUpData = (payload)=>{
     return{
-        type:"SIGNUPDATA",
-        payload:data
-        
+        type: "signUp",
+        payload
     }
 }
 
 export const loginData = (data)=>{
-    console.log("action login",data)
     return{
-        type:"LOGINDATA",
-        payload:data
-        
+        type: "login",
+        payload: data
     }
 }
 
 export const logout = (data)=>{
-    console.log("logout",data)
     return{
-        type:"LOGOUTDATA",
-         payload:data
+        type: "logout",
+        payload:data
         
     }
 }

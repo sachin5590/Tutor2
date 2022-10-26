@@ -2,23 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../action/Action";
+
 const Header = () => {
-   const isLoggedin = useSelector((state)=>state.changeLoginData)
-   
-  // const state1 = useSelector((state)=>state)
-  // console.log(state1)
-   const dispatch= useDispatch()
-   const navigate = useNavigate()
-   console.log(isLoggedin.loginaccount)
+  const dispatch= useDispatch();
+  const navigate = useNavigate();   
+  const state1 = useSelector((state)=>state);
    
   const logout1 = ()=>{
     dispatch(logout())
     navigate("/")
-
   }
+
   return (
     <header className="text-gray-600 body-font">
-       {isLoggedin.loginaccount   ? (
+       {state1 ? (
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <span className="ml-3 text-xl">MOOD</span>

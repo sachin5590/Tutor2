@@ -1,4 +1,3 @@
-import Navbar from './component/Navbar';
 import Signup from './account/Signup';
 import Login from './account/Login';
 import Home from './component/Home'
@@ -12,26 +11,19 @@ import Employee from './component/Employee';
 import { PrivateComponent } from './account/privateComponent';
 function App() {
 
-
   return (
-<>
-<Navbar/>
+    <>
+      <Routes>
+        <Route element={<PrivateComponent/>}>
+          <Route path='/home' element={<Home/>}/>
+          <Route path='/form' element={<Form/>}/> 
+          <Route path='/employee' element={<Employee/>}/>
+        </Route>
 
-<Routes>
-<Route element={<PrivateComponent/>}>
-  <Route path='/home' element={<Home/>}/>
- 
-  <Route path='/form' element={<Form/>}/> 
-   <Route path='/employee' element={<Employee/>}/>
-
-   </Route>
-
-
-   <Route path='/' element={<Signup/>}/>
-  <Route path='/login' element={<Login/>}/>
-</Routes>
-
-</>
+        <Route path='/' element={<Signup/>}/>
+        <Route path='/login' element={<Login/>}/>
+      </Routes>
+    </>
   );
 }
 
